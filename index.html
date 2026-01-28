@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canonical</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="game-container">
+        <div id="menu">
+            <h1>Canonical</h1>
+            <div class="difficulty-select">
+                <h2>Select Difficulty</h2>
+                <button class="btn" data-difficulty="easy">Easy</button>
+                <button class="btn" data-difficulty="medium">Medium</button>
+                <button class="btn" data-difficulty="hard">Hard</button>
+            </div>
+        </div>
+        <div id="game-ui" class="hidden">
+            <div class="info-bar">
+                <span id="turn-info">Your Turn</span>
+                <span id="timer">30</span>
+                <span id="wind-info">Wind: 0</span>
+            </div>
+            <div class="action-buttons">
+                <button class="action-btn active" data-action="attack">Attack</button>
+                <button class="action-btn" data-action="move">Move</button>
+                <button class="action-btn" data-action="jump">Jump</button>
+            </div>
+            <div class="power-bar-container">
+                <div id="power-bar"></div>
+            </div>
+            <div class="hint" id="action-hint">Drag to aim & shoot</div>
+        </div>
+        <canvas id="game-canvas"></canvas>
+        <div id="game-over" class="hidden">
+            <h2 id="winner-text">Game Over</h2>
+            <button class="btn" id="restart-btn">Play Again</button>
+        </div>
+    </div>
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
