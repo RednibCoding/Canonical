@@ -32,7 +32,7 @@ export class NetworkClient {
         if (!serverUrl) {
             // For production: use your server's domain or IP
             // serverUrl = 'wss://your-domain.com:8080';
-            serverUrl = 'ws://185.163.119.178:8080';
+            serverUrl = 'wss://185.163.119.178:8080';
         }
         
         return new Promise((resolve, reject) => {
