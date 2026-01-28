@@ -19,6 +19,16 @@ body {
     height: 600px;
 }
 
+#menu-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    z-index: 1;
+}
+
 #game-canvas {
     display: block;
     background: #87CEEB;
@@ -34,7 +44,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(26, 26, 46, 0.95);
+    background: rgba(26, 26, 46, 0.55);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -79,15 +89,76 @@ body {
     transform: translateY(0);
 }
 
+.btn:disabled {
+    background: linear-gradient(135deg, #666 0%, #444 100%);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.btn:disabled:hover {
+    transform: none;
+    box-shadow: none;
+}
+
 #game-ui {
     position: absolute;
     top: 10px;
     left: 10px;
     right: 10px;
     display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 5;
+}
+
+.power-team-row {
+    display: flex;
     justify-content: space-between;
     align-items: center;
-    z-index: 5;
+    width: 100%;
+}
+
+.team-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 8px 16px;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+}
+
+.team-label.is-active {
+    border: 2px solid gold;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.team-marker {
+    font-size: 1.2rem;
+}
+
+.team-green .team-marker {
+    color: #4ade80;
+}
+
+.team-red .team-marker {
+    color: #f87171;
+}
+
+.team-you-badge {
+    background: gold;
+    color: #000;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    margin-left: 5px;
+}
+
+.game-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .info-bar {
@@ -107,7 +178,7 @@ body {
 }
 
 .power-bar-container {
-    width: 150px;
+    width: 300px;
     height: 20px;
     background: rgba(0, 0, 0, 0.7);
     border-radius: 10px;
@@ -177,6 +248,201 @@ body {
     background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
     font-weight: bold;
     box-shadow: 0 2px 10px rgba(74, 222, 128, 0.4);
+}
+
+/* Menu sections */
+.menu-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.menu-section h2 {
+    color: #ccc;
+    margin-bottom: 1rem;
+}
+
+.btn-back {
+    background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
+    margin-top: 20px;
+}
+
+.btn-surrender {
+    width: auto;
+    padding: 8px 20px;
+    font-size: 0.9rem;
+    background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+    margin: 0;
+}
+
+.btn-surrender:hover {
+    box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4);
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Lobby styles */
+#connection-status {
+    color: #fbbf24;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+#connection-status.connected {
+    color: #4ade80;
+}
+
+#connection-status.error {
+    color: #ef4444;
+}
+
+.lobby-container {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.lobby-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    min-width: 200px;
+}
+
+.lobby-left h3 {
+    margin: 0;
+    color: #ccc;
+    font-size: 1.1rem;
+}
+
+#player-name {
+    width: 200px;
+    padding: 10px 15px;
+    border: 2px solid #667eea;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    font-size: 1rem;
+    text-align: center;
+}
+
+#player-name::placeholder {
+    color: #888;
+}
+
+.lobby-right {
+    flex: 1;
+    min-width: 350px;
+    max-width: 500px;
+}
+
+#games-list {
+    width: 100%;
+    height: 350px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.games-header {
+    background: rgba(102, 126, 234, 0.3);
+    padding: 10px;
+    color: #ccc;
+    font-weight: bold;
+    text-align: center;
+}
+
+#games-container {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.game-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.game-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.game-info {
+    color: #fff;
+}
+
+.game-info .host-name {
+    font-weight: bold;
+}
+
+.game-info .player-count {
+    font-size: 0.8rem;
+    color: #aaa;
+}
+
+.game-actions {
+    display: flex;
+    gap: 5px;
+}
+
+.game-actions button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: opacity 0.2s;
+}
+
+.game-actions button:hover {
+    opacity: 0.8;
+}
+
+.join-btn {
+    background: #4ade80;
+    color: #000;
+}
+
+.spectate-btn {
+    background: #667eea;
+    color: #fff;
+}
+
+.no-games {
+    color: #888;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Waiting room */
+#room-code {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 15px 30px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+#room-code-value {
+    color: #4ade80;
+    font-weight: bold;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+}
+
+#players-in-room {
+    color: #ccc;
+    margin-bottom: 20px;
 }
 
 .hidden {

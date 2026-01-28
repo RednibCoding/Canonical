@@ -8,30 +8,74 @@
 </head>
 <body>
     <div id="game-container">
+        <canvas id="menu-background" width="1024" height="600"></canvas>
         <div id="menu">
             <h1>Canonical</h1>
-            <div class="difficulty-select">
+            <div id="main-menu" class="menu-section">
+                <button class="btn" id="singleplayer-btn">Single Player</button>
+                <button class="btn" id="multiplayer-btn">Multiplayer</button>
+            </div>
+            <div id="difficulty-menu" class="menu-section hidden">
                 <h2>Select Difficulty</h2>
                 <button class="btn" data-difficulty="easy">Easy</button>
                 <button class="btn" data-difficulty="medium">Medium</button>
                 <button class="btn" data-difficulty="hard">Hard</button>
+                <button class="btn btn-back" id="back-to-main">Back</button>
+            </div>
+            <div id="lobby-menu" class="menu-section hidden">
+                <h2>Game Lobby</h2>
+                <div id="connection-status">Connecting...</div>
+                <div class="lobby-container">
+                    <div class="lobby-left">
+                        <h3>Create Game</h3>
+                        <input type="text" id="player-name" placeholder="Your Name" minlength="3" maxlength="12">
+                        <button class="btn" id="create-game-btn">Create Game</button>
+                        <button class="btn btn-back" id="back-to-main-mp">Back</button>
+                    </div>
+                    <div class="lobby-right">
+                        <div id="games-list">
+                            <div class="games-header">Available Games</div>
+                            <div id="games-container"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="waiting-room" class="menu-section hidden">
+                <h2>Waiting for Opponent...</h2>
+                <div id="room-code">Room Code: <span id="room-code-value">----</span></div>
+                <div id="players-in-room"></div>
+                <button class="btn" id="start-game-btn" disabled>Start Game</button>
+                <button class="btn btn-back" id="leave-room-btn">Leave</button>
             </div>
         </div>
         <div id="game-ui" class="hidden">
-            <div class="info-bar">
-                <span id="turn-info">Your Turn</span>
-                <span id="timer">30</span>
-                <span id="wind-info">Wind: 0</span>
+            <div class="game-controls">
+                <div class="info-bar">
+                    <span id="turn-info">Your Turn</span>
+                    <span id="timer">30</span>
+                    <span id="wind-info">Wind: 0</span>
+                </div>
+                <div class="action-buttons">
+                    <button class="action-btn active" data-action="attack">Attack</button>
+                    <button class="action-btn" data-action="move">Move</button>
+                    <button class="action-btn" data-action="jump">Jump</button>
+                </div>
+                <div class="hint" id="action-hint">Drag to aim & shoot</div>
+                <button class="btn btn-surrender" id="surrender-btn">Surrender</button>
             </div>
-            <div class="action-buttons">
-                <button class="action-btn active" data-action="attack">Attack</button>
-                <button class="action-btn" data-action="move">Move</button>
-                <button class="action-btn" data-action="jump">Jump</button>
+            <div class="power-team-row">
+                <div id="team-left" class="team-label team-green">
+                    <span class="team-marker">●</span>
+                    <span class="team-name">Player 1</span>
+                </div>
+                <div class="power-bar-container">
+                    <div id="power-bar"></div>
+                </div>
+                <div id="team-right" class="team-label team-red">
+                    <span class="team-marker">●</span>
+                    <span class="team-name">Player 2</span>
+                </div>
             </div>
-            <div class="power-bar-container">
-                <div id="power-bar"></div>
-            </div>
-            <div class="hint" id="action-hint">Drag to aim & shoot</div>
         </div>
         <canvas id="game-canvas"></canvas>
         <div id="game-over" class="hidden">

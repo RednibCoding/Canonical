@@ -1,19 +1,31 @@
 // Destructible terrain using pixel data
 
 export class Terrain {
-    constructor(width, height) {
+    constructor(width, height, seed = null) {
         this.width = width;
         this.height = height;
         this.canvas = document.createElement('canvas');
         this.canvas.width = width;
         this.canvas.height = height;
         this.ctx = this.canvas.getContext('2d');
+        this.seed = seed;
         this.generate();
+    }
+
+    // Simple seeded random number generator
+    seededRandom(seed) {
+        return function() {
+            seed = (seed * 9301 + 49297) % 233280;
+            return seed / 233280;
+        };
     }
 
     generate() {
         const ctx = this.ctx;
         const { width, height } = this;
+        
+        // Use seeded random if seed provided
+        const rng = this.seed !== null ? this.seededRandom(this.seed) : Math.random;
         
         // Clear with transparent
         ctx.clearRect(0, 0, width, height);
@@ -48,9 +60,9 @@ export class Terrain {
         const sectionWidth = (width - 100) / patchCount;
         for (let i = 0; i < patchCount; i++) {
             // Distribute patches evenly across the terrain width
-            const x = 50 + i * sectionWidth + Math.random() * sectionWidth * 0.7;
-            const y = baseHeight + 70 + Math.random() * (height - baseHeight - 90);
-            const size = 20 + Math.random() * 35;
+            const x = 50 + i * sectionWidth + rng() * sectionWidth * 0.7;
+            const y = baseHeight + 70 + rng() * (height - baseHeight - 90);
+            const size = 20 + rng() * 35;
             ctx.beginPath();
             ctx.arc(x, y, size, 0, Math.PI * 2);
             ctx.fill();
