@@ -33,10 +33,6 @@ export class NetworkClient {
             // For production: use your server's domain or IP
             // serverUrl = 'wss://your-domain.com:8080';
             serverUrl = 'ws://185.163.119.178:8080';
-            
-            // Default: same hostname (works if game is served from same server)
-            const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-            serverUrl = `${protocol}//${window.location.hostname}:8080`;
         }
         
         return new Promise((resolve, reject) => {
