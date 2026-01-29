@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexisware Games</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .container {
+            text-align: center;
+            padding: 40px;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tagline {
+            color: #888;
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+        }
+
+        .games {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .game-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 30px 40px;
+            width: 280px;
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(102, 126, 234, 0.5);
+            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.2);
+        }
+
+        .game-icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+        }
+
+        .game-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .game-desc {
+            color: #aaa;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .canonical-icon {
+            color: #ef4444;
+        }
+
+        .mudden-icon {
+            color: #22c55e;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 20px;
+            color: #555;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Nexisware</h1>
+        <p class="tagline">Browser Games</p>
+        
+        <div class="games">
+            <a href="/canonical/" class="game-card">
+                <div class="game-icon canonical-icon">💣</div>
+                <div class="game-title">Canonical</div>
+                <div class="game-desc">Artillery battle game with destructible terrain. Play solo against AI or challenge friends online!</div>
+            </a>
+            
+            <a href="/mudden/" class="game-card">
+                <div class="game-icon mudden-icon">🎮</div>
+                <div class="game-title">Mudden</div>
+                <div class="game-desc">Adventure awaits in this exciting game experience.</div>
+            </a>
+        </div>
+    </div>
+    
+    <footer>&copy; 2026 Nexisware</footer>
+</body>
+</html>

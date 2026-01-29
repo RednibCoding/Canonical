@@ -12,12 +12,7 @@ export class Projectile {
         this.damage = 35;
         this.active = true;
         this.rotation = 0;
-        this.bounciness = 0.4;
-        this.friction = 0.8;
-        this.bounceCount = 0;
-        this.maxBounces = 3;
-        this.fuseTime = 180; // 3 seconds at 60fps
-        this.hitWorm = false;
+        this.fuseTime = 300; // 5 seconds max flight time
     }
 
     update(terrain, wind) {
@@ -36,49 +31,10 @@ export class Projectile {
         // Rotate for visual effect
         this.rotation += this.velocityX * 0.1;
         
-        // Check terrain collision
+        // Check terrain collision - explode on first contact
+        // Check terrain collision - explode on first contact
         if (terrain.isSolid(this.x, this.y)) {
-            // Simple bounce logic
-            if (this.bounceCount < this.maxBounces) {
-                // Find surface normal (simplified)
-                const checkDist = 5;
-                const solidLeft = terrain.isSolid(this.x - checkDist, this.y);
-                const solidRight = terrain.isSolid(this.x + checkDist, this.y);
-                const solidUp = terrain.isSolid(this.x, this.y - checkDist);
-                const solidDown = terrain.isSolid(this.x, this.y + checkDist);
-                
-                if (solidDown && !solidUp) {
-                    // Hit from above
-                    this.velocityY = -Math.abs(this.velocityY) * this.bounciness;
-                    this.velocityX *= this.friction;
-                    this.y -= 2;
-                } else if (solidUp && !solidDown) {
-                    // Hit from below
-                    this.velocityY = Math.abs(this.velocityY) * this.bounciness;
-                } else if (solidLeft && !solidRight) {
-                    // Hit from right
-                    this.velocityX = Math.abs(this.velocityX) * this.bounciness;
-                } else if (solidRight && !solidLeft) {
-                    // Hit from left
-                    this.velocityX = -Math.abs(this.velocityX) * this.bounciness;
-                } else {
-                    // Embedded in terrain - explode
-                    this.fuseTime = 0;
-                }
-                
-                this.bounceCount++;
-                
-                // Explode after max bounces
-                if (this.bounceCount >= this.maxBounces) {
-                    this.fuseTime = 0;
-                }
-                
-                // Stop if velocity is very low
-                if (Math.abs(this.velocityX) < 0.5 && Math.abs(this.velocityY) < 0.5) {
-                    this.velocityX = 0;
-                    this.velocityY = 0;
-                }
-            }
+            this.fuseTime = 0; // Explode immediately
         }
         
         // Fuse countdown
@@ -91,7 +47,7 @@ export class Projectile {
     }
 
     shouldExplode() {
-        return this.active && (this.fuseTime <= 0 || this.hitWorm);
+        return this.active && this.fuseTime <= 0;
     }
 
     checkWormCollision(worms) {
@@ -101,7 +57,7 @@ export class Projectile {
             const dy = this.y - (worm.y - 12); // Center of worm
             const dist = Math.sqrt(dx * dx + dy * dy);
             if (dist < this.radius + 10) {
-                this.hitWorm = true;
+                this.fuseTime = 0; // Explode on worm hit
                 return true;
             }
         }

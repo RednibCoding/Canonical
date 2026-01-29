@@ -1,8 +1,10 @@
-// Canonical Multiplayer Server
+// Canonical Multiplayer Server (WebSocket only)
 import { WebSocketServer } from 'ws';
 
 const PORT = process.env.PORT || 8080;
 const wss = new WebSocketServer({ port: PORT });
+
+console.log(`Canonical WebSocket server running on port ${PORT}`);
 
 // Game rooms storage
 const rooms = new Map();
@@ -362,5 +364,3 @@ wss.on('connection', (ws) => {
         console.error(`WebSocket error for ${clientId}:`, error);
     });
 });
-
-console.log(`Canonical server running on port ${PORT}`);

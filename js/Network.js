@@ -28,11 +28,9 @@ export class NetworkClient {
     }
 
     connect(serverUrl = null) {
-        // Production server URL - change this to your server's address
+        // Connect directly to WebSocket server on port 8080
         if (!serverUrl) {
-            // For production: use your server's domain or IP
-            // serverUrl = 'wss://your-domain.com:8080';
-            serverUrl = 'ws://185.163.119.178:8080';
+            serverUrl = `ws://${window.location.hostname}:8080`;
         }
         
         return new Promise((resolve, reject) => {
